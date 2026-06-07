@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Çözüm Öğeleri/" />
+  <Project Path="Asteroids/Asteroids.vcxproj" />
+</Solution>

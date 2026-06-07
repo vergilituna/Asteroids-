@@ -1,0 +1,14 @@
+﻿  mainAsteroids.cpp
+C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,9): error C2143: sözdizimi hatası: ';' eksik ('*' öncesinde)
+  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
+  
+C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,4): error C4430: tür belirticisi eksik - int varsayıldı. Not: C++ varsayılan int desteği içermez
+  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
+  
+C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,14): error C2238: ';' öncesinde beklenmeyen belirteçler
+  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
+  
+C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\mainAsteroids.cpp(170,11): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\mainAsteroids.cpp(196,11): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+  ObjectsList.cpp
+  Kod Üretiliyor...
