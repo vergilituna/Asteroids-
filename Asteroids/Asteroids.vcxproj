@@ -109,6 +109,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\vergi\source\repos\Asteroids\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,6 +150,9 @@
     <ClCompile Include="..\..\..\..\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\Ship.cpp" />
     <ClCompile Include="..\..\..\..\OneDrive\Masaüstü\Ficheros C++ trabajo 2\Ficheros C++ trabajo 2\GLstuff.cpp" />
     <ClCompile Include="..\ObjectsList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\x64\Debug\glut32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

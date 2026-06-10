@@ -1,14 +1,24 @@
-﻿  mainAsteroids.cpp
-C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,9): error C2143: sözdizimi hatası: ';' eksik ('*' öncesinde)
-  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
-  
-C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,4): error C4430: tür belirticisi eksik - int varsayıldı. Not: C++ varsayılan int desteği içermez
-  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
-  
-C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\ObjectsList.h(16,14): error C2238: ';' öncesinde beklenmeyen belirteçler
-  ('../../../../OneDrive/Masaüstü/Asteroids 2026 alumnos/Asteroids 2026 alumnos/mainAsteroids.cpp' kaynak dosyası derleniyor)
-  
-C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\mainAsteroids.cpp(170,11): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
-C:\Users\vergi\OneDrive\Masaüstü\Asteroids 2026 alumnos\Asteroids 2026 alumnos\mainAsteroids.cpp(196,11): warning C4267: '=': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
-  ObjectsList.cpp
-  Kod Üretiliyor...
+﻿Asteroid.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutSolidSphere için "public: virtual void __cdecl Asteroid::draw(void)" (?draw@Asteroid@@UEAAXXZ) işlevinde başvuruldu
+Bullet.obj : error LNK2001: çözümlenmemiş dış sembol __imp_glutSolidSphere
+Flame.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutSolidTorus için "public: virtual void __cdecl Flame::draw(void)" (?draw@Flame@@UEAAXXZ) işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutInit için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutInitDisplayMode için main işlevinde başvuruldu
+GLstuff.obj : error LNK2001: çözümlenmemiş dış sembol __imp_glutInitDisplayMode
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutInitWindowSize için main işlevinde başvuruldu
+GLstuff.obj : error LNK2001: çözümlenmemiş dış sembol __imp_glutInitWindowSize
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutMainLoop için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutCreateWindow için main işlevinde başvuruldu
+GLstuff.obj : error LNK2001: çözümlenmemiş dış sembol __imp_glutCreateWindow
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutPostRedisplay için "void __cdecl OnDibuja(void)" (?OnDibuja@@YAXXZ) işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutSwapBuffers için "void __cdecl OnDibuja(void)" (?OnDibuja@@YAXXZ) işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutDisplayFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutKeyboardFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutMouseFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutMotionFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutIdleFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutSpecialFunc için main işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutGetModifiers için "void __cdecl OnKeyboardDown(unsigned char,int,int)" (?OnKeyboardDown@@YAXEHH@Z) işlevinde başvuruldu
+mainAsteroids.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutBitmapCharacter için "void __cdecl gameover(int)" (?gameover@@YAXH@Z) işlevinde başvuruldu
+Ship.obj : error LNK2019: çözümlenmemiş dış sembol __imp_glutSolidCone için "public: virtual void __cdecl Ship::draw(void)" (?draw@Ship@@UEAAXXZ) işlevinde başvuruldu
+C:\Users\vergi\source\repos\Asteroids\x64\Debug\glut32.lib : warning LNK4272: 'x86' kitaplık makine türü, 'x64' hedef makine türüyle çakışıyor
+C:\Users\vergi\source\repos\Asteroids\x64\Debug\Asteroids.exe : fatal error LNK1120: 18 çözümlenmemiş dışlar

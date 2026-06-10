@@ -4,5 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/Çözüm Öğeleri/" />
-  <Project Path="Asteroids/Asteroids.vcxproj" />
+  <Project Path="Asteroids/Asteroids.vcxproj" Id="4b164a90-eb0b-460e-a3f1-81c0d5443611" />
 </Solution>

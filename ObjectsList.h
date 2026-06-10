@@ -1,22 +1,22 @@
 #ifndef OBJECTSLIST_H
 #define OBJECTSLIST_H
 
-#include "Shape.h"
-#include "Asteroid.h"
-#include "Ship.h"
-#include "Bullet.h"
-#include "commonstuff.h"
+#include "commonstuff.h" 
+
+
+class Shape;
+class Asteroid;
+class Ship;
+class Bullet;
 
 struct Node {
     Shape* object;
     Node* next;
 };
 
-
 class ObjectsList {
 private:
-    Node* list_head; 
-
+    Node* list_head;
 public:
     ObjectsList();
     ~ObjectsList();

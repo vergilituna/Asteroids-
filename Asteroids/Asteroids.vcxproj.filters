@@ -75,4 +75,9 @@
       <Filter>Kaynak Dosyalar</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\x64\Debug\glut32.lib">
+      <Filter>Kaynak Dosyalar</Filter>
+    </Library>
+  </ItemGroup>
 </Project>
