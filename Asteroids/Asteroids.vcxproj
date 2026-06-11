@@ -154,6 +154,9 @@
   <ItemGroup>
     <Library Include="..\x64\Debug\glut32.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\x64\Debug\glut32.dll" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

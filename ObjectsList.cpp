@@ -135,7 +135,7 @@ int ObjectsList::collisions(Bullet* bullet, Ship* ship, float* expl_pos) {
                 float distShip = mydistance(posAst[0], posAst[1], posShip[0], posShip[1]);
 
                 if (distShip < (ast->getSize() + ship->getSize())) {
-                    this->remove(ship);
+                    
                     return 1;
                 }
             }

@@ -80,4 +80,9 @@
       <Filter>Kaynak Dosyalar</Filter>
     </Library>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\x64\Debug\glut32.dll">
+      <Filter>Kaynak Dosyalar</Filter>
+    </None>
+  </ItemGroup>
 </Project>
