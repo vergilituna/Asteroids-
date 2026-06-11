@@ -16,6 +16,7 @@ class Asteroid:public Shape {
   void draw();
   float getSize();
   void reposition();
+  float operator+(Shape* s);
 };
 
 #endif

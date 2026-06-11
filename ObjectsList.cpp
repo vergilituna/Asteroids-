@@ -15,7 +15,12 @@
 
 
 ObjectsList::ObjectsList() {
+    n = 0;
     list_head = nullptr;
+    add(new Ship());
+    for(int i = 0; i < NUMASTEROIDS; ++i) {
+        add(new Asteroid(1));
+    }
 }
 
 
@@ -37,6 +42,7 @@ void ObjectsList::add(Shape* obj) {
     newNode->object = obj;
     newNode->next = list_head;
     list_head = newNode;
+    n++;
 }
 
 
@@ -56,6 +62,7 @@ void ObjectsList::remove(Shape* obj) {
             }
             delete current->object;
             delete current;
+            n--;
             return;
         }
         prev = current;
@@ -130,21 +137,17 @@ int ObjectsList::collisions(Bullet* bullet, Ship* ship, float* expl_pos) {
 
           
             if (ship != nullptr) {
-                float posShip[3];
-                ship->getPos(posShip);
-                float distShip = mydistance(posAst[0], posAst[1], posShip[0], posShip[1]);
+                float distShip = (*ast) + ship;
 
                 if (distShip < (ast->getSize() + ship->getSize())) {
-                    
+                    this->remove(ship);
                     return 1;
                 }
             }
 
             
             if (bullet != nullptr) {
-                float posBullet[3];
-                bullet->getPos(posBullet);
-                float distBullet = mydistance(posAst[0], posAst[1], posBullet[0], posBullet[1]);
+                float distBullet = (*ast) + bullet;
 
                 if (distBullet < (ast->getSize() + bullet->getSize())) {
                     this->remove(bullet);

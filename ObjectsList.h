@@ -16,6 +16,7 @@ struct Node {
 
 class ObjectsList {
 private:
+    int n;
     Node* list_head;
 public:
     ObjectsList();
