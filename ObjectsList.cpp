@@ -135,24 +135,27 @@ int ObjectsList::collisions(Bullet* bullet, Ship* ship, float* expl_pos) {
             float posAst[3];
             ast->getPos(posAst);
 
-          
             if (ship != nullptr) {
                 float distShip = (*ast) + ship;
 
                 if (distShip < (ast->getSize() + ship->getSize())) {
-                    this->remove(ship);
+                    expl_pos[0] = posAst[0];
+                    expl_pos[1] = posAst[1];
+                    // The ship is NOT removed here, mainAsteroids handles it.
                     return 1;
                 }
             }
 
-            
             if (bullet != nullptr) {
                 float distBullet = (*ast) + bullet;
 
                 if (distBullet < (ast->getSize() + bullet->getSize())) {
-                    this->remove(bullet);
+                    expl_pos[0] = posAst[0];
+                    expl_pos[1] = posAst[1];
+                    // The bullet is NOT removed here, mainAsteroids handles it.
 
-                    if (ast->getSize() == SMALL) {
+                    float size = ast->getSize();
+                    if (size < 0.4f) { // SMALL
                         this->remove(ast);
                         return 4;
                     }
@@ -161,7 +164,7 @@ int ObjectsList::collisions(Bullet* bullet, Ship* ship, float* expl_pos) {
                         if (newAst != nullptr) {
                             this->add(newAst);
                         }
-                        return (ast->getSize() == MEDIUM) ? 2 : 3;
+                        return (size < 0.7f) ? 3 : 2; // MEDIUM returns 3, BIG returns 2
                     }
                 }
             }
