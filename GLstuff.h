@@ -14,6 +14,11 @@
 #ifdef linux
 #include <GL/glut.h>
 #endif
+
+#if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(WIN32)
+#include <windows.h>
+#include "glut.h"
+#endif
  
 #define  ANCHO 800
 #define ALTO 800

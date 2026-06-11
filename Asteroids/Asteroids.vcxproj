@@ -148,7 +148,6 @@
     <ClCompile Include="..\mainAsteroids.cpp" />
     <ClCompile Include="..\Shape.cpp" />
     <ClCompile Include="..\Ship.cpp" />
-    <ClCompile Include="..\GLstuff.cpp" />
     <ClCompile Include="..\ObjectsList.cpp" />
   </ItemGroup>
   <ItemGroup>
