@@ -1,17 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
 #define GLUT_DISABLE_ATEXIT_HACK
 
-#include <windows.h>
+#include "commonstuff.h"
 #include <cstdlib>
-#include "glut.h"
 #include "ObjectsList.h"
 #include "Shape.h"
 #include "Asteroid.h"
 #include "Ship.h"
 #include "Bullet.h"
-#include "commonstuff.h"
 
 
 ObjectsList::ObjectsList() {

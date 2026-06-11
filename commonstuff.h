@@ -9,13 +9,13 @@
 #include "GLUT/glut.h"
 #endif
 
-#ifdef linux
+#if defined(__linux__) && !defined(__APPLE__)
 #include <GL/glut.h>
 #endif
 
 #if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(WIN32)
 #include <windows.h>
-#include "glut.h"
+#include <GL/glut.h>
 #endif
 
 #include <stdlib.h>
@@ -56,7 +56,7 @@
 #define ROT   2
 
 
-#ifdef linux
+#if defined(__linux__) && !defined(__APPLE__)
 #define SEED_RAND(seed)  (srandom((seed)))
 #define RAND_FRAC()      ((double)random()*(1.0/2147483647.0))
 #else
