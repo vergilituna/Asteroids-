@@ -324,8 +324,10 @@ void OnSpecKeyboardDown(int key, int x, int y)
     {
 
     case GLUT_KEY_DOWN:
+        theShip->thrust(-SHIPSPEED);
       break;
     case GLUT_KEY_UP:
+        theShip->thrust(SHIPSPEED);
       break;
     case GLUT_KEY_LEFT: theShip->rotate(0,-5,0);
       break;
