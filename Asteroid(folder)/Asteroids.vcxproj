@@ -140,6 +140,7 @@
     <ClInclude Include="..\GLstuff.h" />
     <ClInclude Include="..\Man.h" />
     <ClInclude Include="..\ObjectsList.h" />
+    <ClInclude Include="..\Ovni.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Asteroid.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="..\Shape.cpp" />
     <ClCompile Include="..\Ship.cpp" />
     <ClCompile Include="..\ObjectsList.cpp" />
+    <ClCompile Include="..\Ovni.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\x64\Debug\glut32.lib" />

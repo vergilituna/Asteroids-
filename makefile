@@ -3,7 +3,7 @@ LinuxFLAGS = -lGL -lGLU -lglut -lm -lstdc++
 WinCFLAGS = -I./include -DFREEGLUT_STATIC -DGLUT_DISABLE_ATEXIT_HACK
 WinFLAGS = -L./lib -lfreeglut_static -lglu32 -lopengl32 -lgdi32 -lwinmm -mwindows -lstdc++
 
-SOURCES = mainAsteroids.cpp ObjectsList.cpp Asteroid.cpp Ship.cpp Bullet.cpp Flame.cpp Shape.cpp
+SOURCES = mainAsteroids.cpp ObjectsList.cpp Asteroid.cpp Ship.cpp Bullet.cpp Flame.cpp Shape.cpp Ovni.cpp
 TARGET = Asteroids
 
 ifeq ($(OS),Windows_NT)

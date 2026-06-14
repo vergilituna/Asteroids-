@@ -43,11 +43,15 @@
 #define WINY 600
 
 #define ASTEROID_SPEED 0.05
-#define OVNI_SPEED 0.05 
+#define OVNI_SPEED 0.05
 #define BULLETSPEED 0.2
 #define SHIPSPEED 0.01
 #define NUMASTEROIDS 15
 #define MAXSHOTTIME 100
+
+#ifndef GLUT_KEY_SHIFT_R
+#define GLUT_KEY_SHIFT_R 0x010F
+#endif
 
 #define ESC 27
 #define EPS 1

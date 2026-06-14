@@ -5,7 +5,7 @@
 
 //***********************
 // Asteroids Open GL
-// Claudio Rossi, Universidad Politécnica de Madrid 
+// Claudio Rossi, Universidad Politï¿½cnica de Madrid 
 // (C) 2015 
 //***********************
 
@@ -25,6 +25,7 @@
 #include "Ship.h"
 #include "ObjectsList.h"
 #include "Flame.h"
+#include "Ovni.h"
 
 
 //***********************
@@ -46,16 +47,18 @@ void OnSpecKeyboardDown(int key, int x, int y);
 
 void printdata();
 void gameover(int score);
+void tryFire(Ship* ship, Bullet*& bullet);
+void handleCollisionResult(int res, Ship* ship, Bullet*& bullet, int& shotTime, int& nShips, int& n_otherShip);
 
   
 //***********************
 // Variables globales
 //***********************
 
-// Posición y step de la camara
+// Posiciï¿½n y step de la camara
 float cam_pos[6]={0, 0, 27};
 
-// posición de la explosión
+// posiciï¿½n de la explosiï¿½n
 float expl_pos[2]={-1000,-1000};
 
 // Modo del Mouse
@@ -63,13 +66,17 @@ int MODE=NONE;
 
 // Objetos globales
 ObjectsList worldobjects;
-Ship *theShip=NULL;
-Bullet *theBullet=NULL;
+Ship *theShip1=NULL;
+Ship *theShip2=NULL;
+Bullet *theBullet1=NULL;
+Bullet *theBullet2=NULL;
 Flame *theFlame=NULL;
 
 // Varias constantes usadas en el programa
-int shotTime=0;
-int nShips=3;
+int shotTime1=0;
+int shotTime2=0;
+int nShips1=3;
+int nShips2=3;
 int score=0;
 int FlameTime=0;
 int FT=20;
@@ -114,29 +121,30 @@ int main(int argc,char* argv[])
     // Idle function: contiene la logica del juego
   glutIdleFunc(myLogic);
   
-  // Callbacks de teclado y ratón
+  // Callbacks de teclado y ratï¿½n
   glutKeyboardFunc(OnKeyboardDown);
   glutSpecialFunc(OnSpecKeyboardDown);
   glutMotionFunc(OnMouseMoveBtn);
   glutMouseFunc(OnMouseBtn);
 
   
-  // Posicciona el punto de vista (cámara)
+  // Posicciona el punto de vista (cï¿½mara)
   gluLookAt(cam_pos[0],cam_pos[1],cam_pos[2],  // posicion del  ojo  
 	    0.0, 0.0, 0.0,		        // hacia que punto mira  
 	    0.0, 1.0, 0.0);         // vector "UP"  (vertical positivo)
 
 
   
-  // Creacción de los objetos iniciales
-  theShip = worldobjects.getShip();
+  // Creacciï¿½n de los objetos iniciales
+  theShip1 = worldobjects.getShip(0);
+  theShip2 = worldobjects.getShip(1);
 
-  // WORLDOBJECTS es declarada estática, se inicializa "automaticamente" - contiene los asteroides  //***
+  // WORLDOBJECTS es declarada estï¿½tica, se inicializa "automaticamente" - contiene los asteroides  //***
   
   // bucle infinito de Open GL
   glutMainLoop();
 
-  // Esto solo sirve para que el compilador no proteste, nunca se llegará aquí
+  // Esto solo sirve para que el compilador no proteste, nunca se llegarï¿½ aquï¿½
   return 0;   
 
 }
@@ -152,7 +160,7 @@ int main(int argc,char* argv[])
 //***********************
 
 
-// Imprime puntuacción y num. de naves
+// Imprime puntuacciï¿½n y num. de naves
 void printdata()
 {
   int i,l;
@@ -160,7 +168,7 @@ void printdata()
   
   glPushMatrix();
 
-  sprintf(buffer,"Ships: %d       Score: %d",nShips,score);
+  sprintf(buffer,"P1: %d   P2: %d   Score: %d",nShips1,nShips2,score);
   l=strlen(buffer); 
 
   glDisable(GL_LIGHTING);
@@ -203,27 +211,85 @@ void gameover(int score)
 }
 
 
+void tryFire(Ship* ship, Bullet*& bullet)
+{
+  if (ship && !bullet)
+    {
+      bullet = ship->fire();
+      worldobjects.add(bullet);
+    }
+}
+
+
+void handleCollisionResult(int res, Ship* ship, Bullet*& bullet, int& shotTime, int& nShips, int& other_nShip)
+{
+  if (res == 1)
+    {
+      nShips--;
+      if (nShips1 == 0 && nShips2 == 0)
+	exit(1);
+      if (nShips > 0)
+	{
+	  ship->resetpos();
+	  worldobjects.reposition(ship);
+	}
+      else { //caso donde un juguador pierde y el otro sobrevive
+          worldobjects.remove(ship);
+      }
+    }
+
+  if (res >= 2)
+    {
+      worldobjects.remove(bullet);
+      bullet = NULL;
+      shotTime = 0;
+      if (res <= 4)
+	score += 100*(res-1);
+      else if (res <= 7)
+	score += 100*(res-4);
+    }
+}
+
+
 // Logica del juego: mueve los objeto mandando el mensaje "move"
 void myLogic()
 {
-  int res;
+  int res1, res2;
 
-  // borra el proyectil después de cierto tiempo si no ha dado con nada
-  if(shotTime++>MAXSHOTTIME)
+  if(shotTime1++>MAXSHOTTIME)
     {
-      worldobjects.remove(theBullet);    // si theBullet==NULL no pasa nada, la remove no lo encuentra y no hace nada
-      theBullet = NULL;
-      shotTime = 0;
+      worldobjects.remove(theBullet1);
+      theBullet1 = NULL;
+      shotTime1 = 0;
     }
+
+  if(shotTime2++>MAXSHOTTIME)
+    {
+      worldobjects.remove(theBullet2);
+      theBullet2 = NULL;
+      shotTime2 = 0;
+    }
+
+  static int ovniSpawnTimer = 0;
+  if (!worldobjects.hasOvni()) {
+    ovniSpawnTimer++;
+    if (ovniSpawnTimer > 500) {
+      worldobjects.add(new Ovni());
+      ovniSpawnTimer = 0;
+    }
+  }
 
   // Pide al mudo que mueve los objetos
   worldobjects.move();
 
-  // Pide si ha habido colisión, pasa referencia a proyectil y nave, retorna tipo de colisión y posición de la colisión
-  // res==0:  No ha colisicón
+  // Pide si ha habido colisiï¿½n, pasa referencia a proyectil y nave, retorna tipo de colisiï¿½n y posiciï¿½n de la colisiï¿½n
+  // res==0:  No ha colisicï¿½n
   // res==1:  Asteroide/Nave
-  // res>=2:  Asteroide/Proyectil, depende del tipo de asteroide (grande/mediano/pequeño)
-  res = worldobjects.collisions(theBullet,theShip,expl_pos);    //***  //***
+  // res>=2:  Asteroide/Proyectil, depende del tipo de asteroide (grande/mediano/pequeï¿½o)
+  res1 = worldobjects.collisions(theBullet1, nShips1 > 0 ? theShip1 : NULL, expl_pos);
+  res2 = worldobjects.collisions(theBullet2, nShips2 > 0 ? theShip2 : NULL, expl_pos);
+
+  int res = (res1 > 0) ? res1 : res2;
 
   // Explosion
   if(res>0 || FlameTime>0)
@@ -243,28 +309,8 @@ void myLogic()
 	  }
     }
   
-  if(res==1)    
-    {
-      nShips--;
-
-      // Esto habría que mejorarlo...  //***
-      if(nShips==0)
-	exit(1);
-      
-      theShip->resetpos();
-      worldobjects.reposition(theShip);
-    }
-
-  if(res>=2)    
-    {
-      worldobjects.remove(theBullet);     //***
-      theBullet = NULL;
-      shotTime = 0;
-      score += 100*(res-1);
-    }
-
-
-
+  handleCollisionResult(res1, theShip1, theBullet1, shotTime1, nShips1, nShips2);
+  handleCollisionResult(res2, theShip2, theBullet2, shotTime2, nShips2, nShips1);
 }
  
 /**************************************************************/ 
@@ -292,27 +338,36 @@ void OnDibuja(void)
 
 void OnKeyboardDown(unsigned char key, int x, int y)
 { 
-  int mod;
-
-  mod=glutGetModifiers();
-
   switch(key)
     {
     case 'q':
+    case 'Q':
     case ESC:
       exit(1);
     case ' ':
-      // Si no hay proyectil, lo crea  //***
-      if(!theBullet)
-	{
-	  theBullet=theShip->fire(); 
-	  worldobjects.add(theBullet);
-	}
-      
+      if (nShips1 > 0)
+	tryFire(theShip1, theBullet1);
       break;
-    case '-': theShip->thrust(SHIPSPEED); break;  // accelara
-    case ',': theShip->hyperjump(); break;  // hyper jump (mueve la nave a una posición random)
-
+    case 'w':
+      if (nShips1 > 0)
+	theShip1->thrust(SHIPSPEED);
+      break;
+    case 's':
+      if (nShips1 > 0)
+	theShip1->thrust(-SHIPSPEED);
+      break;
+    case 'a':
+      if (nShips1 > 0)
+	theShip1->rotate(0, -5, 0);
+      break;
+    case 'd':
+      if (nShips1 > 0)
+	theShip1->rotate(0, 5, 0);
+      break;
+    case '\r':
+        if (nShips2 > 0)
+            tryFire(theShip2, theBullet2);
+        break;
     }		
 
 }
@@ -322,20 +377,21 @@ void OnSpecKeyboardDown(int key, int x, int y)
 { 
   switch(key)
     {
-
     case GLUT_KEY_DOWN:
-        theShip->thrust(-SHIPSPEED);
+      if (nShips2 > 0)
+	theShip2->thrust(-SHIPSPEED);
       break;
     case GLUT_KEY_UP:
-        theShip->thrust(SHIPSPEED);
+      if (nShips2 > 0)
+	theShip2->thrust(SHIPSPEED);
       break;
-    case GLUT_KEY_LEFT: theShip->rotate(0,-5,0);
+    case GLUT_KEY_LEFT:
+      if (nShips2 > 0)
+	theShip2->rotate(0, -5, 0);
       break;
-    case GLUT_KEY_RIGHT: theShip->rotate(0,5,0);
-      break;
-    case GLUT_KEY_PAGE_DOWN:
-      break;
-    case GLUT_KEY_PAGE_UP:
+    case GLUT_KEY_RIGHT:
+      if (nShips2 > 0)
+	theShip2->rotate(0, 5, 0);
       break;
     }		
 

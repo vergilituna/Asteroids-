@@ -8,6 +8,7 @@ class Shape;
 class Asteroid;
 class Ship;
 class Bullet;
+class Ovni;
 
 struct Node {
     Shape* object;
@@ -26,7 +27,9 @@ public:
     void move();
     void draw();
     void reposition(Ship* ship);
-    Ship* getShip();
+    Ship* getShip(int index);
+    bool hasOvni();
+    void removeOffscreenOvnis();
     int collisions(Bullet* bullet, Ship* ship, float* expl_pos);
 };
 

@@ -4,10 +4,16 @@
 #include "Bullet.h"
 
 
-Ship::Ship()
+Ship::Ship(float startX, float startY, float cr, float cg, float cb)
 {
-  pos[X] = 0;
-  pos[Y] = 0;
+  spawnX = startX;
+  spawnY = startY;
+  spawnColor[R] = cr;
+  spawnColor[G] = cg;
+  spawnColor[B] = cb;
+
+  pos[X] = startX;
+  pos[Y] = startY;
   pos[Z] = 0;
 
   rot[Z] = 0;
@@ -22,9 +28,9 @@ Ship::Ship()
   tspeed[Y] = 0;
   tspeed[Z] = 0;
 
-  color[R] = 0.2;
-  color[G] = 0.4;
-  color[B] = 0.3;
+  color[R] = cr;
+  color[G] = cg;
+  color[B] = cb;
 }
 
 void Ship::rotate(float rx, float ry, float rz)
@@ -73,8 +79,8 @@ float Ship::getSize()
 
 void Ship::resetpos()
 {
- pos[X] = 0;
-  pos[Y] = 0;
+  pos[X] = spawnX;
+  pos[Y] = spawnY;
   pos[Z] = 0;
 
   rot[Z] = 0;
@@ -89,7 +95,7 @@ void Ship::resetpos()
   tspeed[Y] = 0;
   tspeed[Z] = 0;
 
-  color[R] = 0.2;
-  color[G] = 0.4;
-  color[B] = 0.3;
+  color[R] = spawnColor[R];
+  color[G] = spawnColor[G];
+  color[B] = spawnColor[B];
 }

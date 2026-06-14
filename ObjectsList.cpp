@@ -8,12 +8,14 @@
 #include "Asteroid.h"
 #include "Ship.h"
 #include "Bullet.h"
+#include "Ovni.h"
 
 
 ObjectsList::ObjectsList() {
     n = 0;
     list_head = nullptr;
-    add(new Ship());
+    add(new Ship(-2.0f, 0.0f, 0.2f, 0.4f, 0.3f));
+    add(new Ship( 2.0f, 0.0f, 0.2f, 0.3f, 0.8f));
     for(int i = 0; i < NUMASTEROIDS; ++i) {
         add(new Asteroid(1));
     }
@@ -71,10 +73,17 @@ void ObjectsList::move() {
     Node* current = list_head;
     while (current != nullptr) {
         if (current->object != nullptr) {
-            current->object->move();
+            Ovni* ovni = dynamic_cast<Ovni*>(current->object);
+            if (ovni != nullptr) {
+                ovni->move();
+            }
+            else {
+                current->object->move();
+            }
         }
         current = current->next;
     }
+    removeOffscreenOvnis();
 }
 
 
@@ -89,16 +98,45 @@ void ObjectsList::draw() {
 }
 
 
-Ship* ObjectsList::getShip() {
+Ship* ObjectsList::getShip(int index) {
     Node* current = list_head;
+    int shipCount = 0;
     while (current != nullptr) {
         Ship* ship = dynamic_cast<Ship*>(current->object);
         if (ship != nullptr) {
-            return ship;
+            if (shipCount == index) {
+                return ship;
+            }
+            shipCount++;
         }
         current = current->next;
     }
     return nullptr;
+}
+
+
+bool ObjectsList::hasOvni() {
+    Node* current = list_head;
+    while (current != nullptr) {
+        if (dynamic_cast<Ovni*>(current->object) != nullptr) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+
+void ObjectsList::removeOffscreenOvnis() {
+    Node* current = list_head;
+    while (current != nullptr) {
+        Node* nextNode = current->next;
+        Ovni* ovni = dynamic_cast<Ovni*>(current->object);
+        if (ovni != nullptr && ovni->isOffScreen()) {
+            remove(ovni);
+        }
+        current = nextNode;
+    }
 }
 
 
@@ -165,6 +203,22 @@ int ObjectsList::collisions(Bullet* bullet, Ship* ship, float* expl_pos) {
                 }
             }
         }
+
+        Ovni* ovni = dynamic_cast<Ovni*>(current->object);
+        if (ovni != nullptr && bullet != nullptr) {
+            float distBullet = (*ovni) + bullet;
+
+            if (distBullet < (ovni->getSize() + bullet->getSize())) {
+                float posOvni[3];
+                ovni->getPos(posOvni);
+                expl_pos[0] = posOvni[0];
+                expl_pos[1] = posOvni[1];
+                int scoreCode = ovni->getScoreCode();
+                this->remove(ovni);
+                return scoreCode;
+            }
+        }
+
         current = current->next;
     }
     return 0;
